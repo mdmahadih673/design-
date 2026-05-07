@@ -1,0 +1,169 @@
+{
+  "entities": {
+    "Hero": {
+      "title": "Hero Section",
+      "description": "Homepage hero content",
+      "type": "object",
+      "properties": {
+        "heading": { "type": "string" },
+        "subheading": { "type": "string" },
+        "description": { "type": "string" },
+        "btn1Text": { "type": "string" },
+        "btn1Link": { "type": "string" },
+        "btn2Text": { "type": "string" },
+        "btn2Link": { "type": "string" },
+        "profilePhoto": { "type": "string" },
+        "bgColor": { "type": "string" }
+      },
+      "required": ["heading", "subheading"]
+    },
+    "About": {
+      "title": "About Me",
+      "description": "About page and profile content",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "jobTitle": { "type": "string" },
+        "bio": { "type": "string" },
+        "experienceYears": { "type": "number" },
+        "location": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "photo": { "type": "string" },
+        "resumeUrl": { "type": "string" }
+      }
+    },
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project item",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "client": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string", "enum": ["published", "draft"] },
+        "isFeatured": { "type": "boolean" },
+        "shortDescription": { "type": "string" },
+        "fullDescription": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "approach": { "type": "string" },
+        "colors": { "type": "array", "items": { "type": "string" } },
+        "typography": { "type": "array", "items": { "type": "string" } },
+        "tools": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["title", "slug", "categoryId", "status"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Project category filter",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "slug": { "type": "string" }
+      },
+      "required": ["name", "slug"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Service offered by the designer",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "detailedDescription": { "type": "string" },
+        "icon": { "type": "string" },
+        "deliverables": { "type": "array", "items": { "type": "string" } },
+        "startingPrice": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] }
+      },
+      "required": ["title", "status"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Client feedback",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "company": { "type": "string" },
+        "content": { "type": "string" },
+        "rating": { "type": "number" },
+        "avatar": { "type": "string" },
+        "status": { "type": "string", "enum": ["visible", "hidden"] }
+      },
+      "required": ["name", "content", "rating", "status"]
+    },
+    "BlogPost": {
+      "title": "Blog Post",
+      "description": "Article or insight",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "featuredImage": { "type": "string" },
+        "content": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string", "enum": ["published", "draft"] }
+      },
+      "required": ["title", "slug", "content", "status"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Contact form submission",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "projectType": { "type": "string" },
+        "budget": { "type": "string" },
+        "message": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "status": { "type": "string", "enum": ["read", "unread"] }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "SocialLink": {
+      "title": "Social Link",
+      "description": "External social profile",
+      "type": "object",
+      "properties": {
+        "platform": { "type": "string" },
+        "url": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] }
+      },
+      "required": ["platform", "url", "status"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global site settings",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string" },
+        "siteLogo": { "type": "string" },
+        "accentColor": { "type": "string" },
+        "maintenanceMode": { "type": "boolean" },
+        "contactEmail": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "whatsappEnabled": { "type": "boolean" },
+        "whatsappNumber": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/hero/main": { "schema": "Hero", "description": "Single document for hero settings" },
+    "/about/main": { "schema": "About", "description": "Single document for about settings" },
+    "/projects/{projectId}": { "schema": "Project", "description": "Collection of projects" },
+    "/categories/{categoryId}": { "schema": "Category", "description": "Collection of categories" },
+    "/services/{serviceId}": { "schema": "Service", "description": "Collection of services" },
+    "/testimonials/{testimonialId}": { "schema": "Testimonial", "description": "Collection of testimonials" },
+    "/blog/{postId}": { "schema": "BlogPost", "description": "Collection of blog posts" },
+    "/messages/{messageId}": { "schema": "Message", "description": "Contact messages" },
+    "/socialLinks/{linkId}": { "schema": "SocialLink", "description": "Social media links" },
+    "/settings/config": { "schema": "Settings", "description": "Global configuration" }
+  }
+}
