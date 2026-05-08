@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      // In this app, we'll check if the user is in an 'admins' collection
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // --- Projects ---
+    match /projects/{projectId} {
+      allow read: if true; // Public can see projects
+      allow write: if isAdmin();
+    }
+
+    // --- Categories ---
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Blog Posts ---
+    match /blogPosts/{postId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Testimonials ---
+    match /testimonials/{testimonialId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Services ---
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Messages ---
+    match /messages/{messageId} {
+      allow create: if true; // Anyone can send a message
+      allow read, write: if isAdmin();
+    }
+
+    // --- Settings ---
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Admins collection ---
+    // Specifically allow the first user to be an admin if needed, 
+    // but usually we seed this or manually add it in console.
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if false; // Only manageable via console for safety
+    }
+  }
+}
