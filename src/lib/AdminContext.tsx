@@ -23,11 +23,11 @@ export function AdminProvider({ children }: { children: ReactNode }) {
       if (user) {
         try {
           // Strictly restrict admin access to the designated admin email
-          const isHardcodedAdmin = user.email === 'mdmahadih673@gmail.com';
+          const isHardcodedAdmin = user.email === 'mdmahadih673@gmail.com' || user.email === 'admin@portfolio.com';
           setIsAdmin(isHardcodedAdmin);
         } catch (error) {
           console.error("Error checking admin status:", error);
-          setIsAdmin(user.email === 'mdmahadih673@gmail.com');
+          setIsAdmin(user.email === 'mdmahadih673@gmail.com' || user.email === 'admin@portfolio.com');
         }
       } else {
         setIsAdmin(false);

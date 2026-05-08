@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/src/lib/firebase';
 import { Button } from '@/src/components/Button';
 import { motion } from 'motion/react';
@@ -23,6 +23,24 @@ export function AdminLogin() {
       navigate('/admin/dashboard');
     } catch (err: any) {
       setError(err.message || 'Failed to login');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSetupAdmin = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      // Create a default admin if it doesn't exist
+      await createUserWithEmailAndPassword(auth, 'admin@portfolio.com', 'admin1234');
+      alert('Admin account created successfully! Use admin@portfolio.com / admin1234 to login.');
+    } catch (err: any) {
+      if (err.code === 'auth/email-already-in-use') {
+        setError('Admin account already exists. Please login.');
+      } else {
+        setError(err.message || 'Setup failed');
+      }
     } finally {
       setLoading(false);
     }
@@ -129,6 +147,17 @@ export function AdminLogin() {
           <Button type="submit" className="w-full py-5 rounded-2xl" disabled={loading}>
             {loading ? 'Logging in...' : 'Login to Dashboard'}
           </Button>
+
+          <div className="pt-4 mt-4 border-t border-black/5 dark:border-white/5">
+            <button 
+              type="button"
+              onClick={handleSetupAdmin}
+              className="w-full text-xs text-accent font-bold uppercase tracking-wider hover:underline"
+              disabled={loading}
+            >
+              First time? One-click Setup Admin
+            </button>
+          </div>
         </form>
 
         <p className="mt-8 text-center text-xs text-light-text">
