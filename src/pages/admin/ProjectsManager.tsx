@@ -145,10 +145,10 @@ export function ProjectsManager() {
                   <select 
                     value={currentProject?.categoryId}
                     onChange={(e) => setCurrentProject({ ...currentProject, categoryId: e.target.value })}
-                    className="w-full bg-slate-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl px-4 py-3 outline-none"
+                    className="w-full bg-slate-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl px-4 py-3 outline-none text-black dark:text-white"
                   >
-                    <option value="">Select Category</option>
-                    {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                    <option value="" className="dark:bg-dark-card">Select Category</option>
+                    {categories.map(c => <option key={c.id} value={c.id} className="dark:bg-dark-card">{c.name}</option>)}
                   </select>
                 </div>
               </div>
@@ -211,10 +211,10 @@ export function ProjectsManager() {
                   <select 
                     value={currentProject?.status}
                     onChange={(e) => setCurrentProject({ ...currentProject, status: e.target.value as any })}
-                    className="w-full bg-slate-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl px-4 py-3 outline-none"
+                    className="w-full bg-slate-50 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl px-4 py-3 outline-none text-black dark:text-white"
                   >
-                    <option value="draft">Draft</option>
-                    <option value="published">Published</option>
+                    <option value="draft" className="dark:bg-dark-card">Draft</option>
+                    <option value="published" className="dark:bg-dark-card">Published</option>
                   </select>
                 </div>
                 <div className="space-y-2">

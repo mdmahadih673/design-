@@ -147,11 +147,11 @@ export function BlogManager() {
                     required
                     value={formData.categoryId}
                     onChange={e => setFormData({...formData, categoryId: e.target.value})}
-                    className="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl px-6 py-4 outline-none focus:border-accent transition-all appearance-none"
+                    className="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl px-6 py-4 outline-none focus:border-accent transition-all appearance-none text-black dark:text-white"
                   >
-                    <option value="">Select Category</option>
+                    <option value="" className="dark:bg-dark-card">Select Category</option>
                     {categories.map(c => (
-                      <option key={c.id} value={c.id}>{c.name}</option>
+                      <option key={c.id} value={c.id} className="dark:bg-dark-card">{c.name}</option>
                     ))}
                   </select>
                 </div>

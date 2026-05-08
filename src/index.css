@@ -21,5 +21,9 @@
   body {
     @apply transition-colors duration-300 bg-white text-slate-900 dark:bg-[#0F0F0F] dark:text-white;
   }
+
+  select option {
+    @apply dark:bg-[#1A1A1A] dark:text-white;
+  }
 }
 
