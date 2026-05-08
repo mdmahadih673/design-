@@ -22,12 +22,15 @@ export function AdminProvider({ children }: { children: ReactNode }) {
       setUser(user);
       if (user) {
         try {
+          console.log("Current user email:", user.email, "Verified:", user.emailVerified);
           // Strictly restrict admin access to the designated admin email
-          const isHardcodedAdmin = user.email === 'mdmahadih673@gmail.com' || user.email === 'admin@portfolio.com';
+          const email = (user.email || '').toLowerCase();
+          const isHardcodedAdmin = email === 'mdmahadih673@gmail.com' || email === 'admin@portfolio.com';
           setIsAdmin(isHardcodedAdmin);
         } catch (error) {
           console.error("Error checking admin status:", error);
-          setIsAdmin(user.email === 'mdmahadih673@gmail.com' || user.email === 'admin@portfolio.com');
+          const email = (user.email || '').toLowerCase();
+          setIsAdmin(email === 'mdmahadih673@gmail.com' || email === 'admin@portfolio.com');
         }
       } else {
         setIsAdmin(false);

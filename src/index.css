@@ -23,7 +23,8 @@
   }
 
   select option {
-    @apply dark:bg-[#1A1A1A] dark:text-white;
+    background-color: #1A1A1A !important;
+    color: white !important;
   }
 }
 

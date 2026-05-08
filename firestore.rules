@@ -7,18 +7,14 @@ service cloud.firestore {
     }
     
     function isAdmin() {
-      return isSignedIn() && 
-        (request.auth.token.email == 'mdmahadih673@gmail.com' || request.auth.token.email == 'admin@portfolio.com') && 
-        (request.auth.token.email_verified == true || request.auth.token.email == 'mdmahadih673@gmail.com' || request.auth.token.email == 'admin@portfolio.com');
+      return isSignedIn() && (
+        request.auth.token.email.matches('(?i)mdmahadih673@gmail\\.com') || 
+        request.auth.token.email.matches('(?i)admin@portfolio\\.com')
+      );
     }
 
     function isValidId(id) {
       return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
-    }
-
-    // Default deny
-    match /{document=**} {
-      allow read, write: if false;
     }
 
     // Connectivity test path
@@ -96,6 +92,11 @@ service cloud.firestore {
     match /settings/{settingId} {
       allow read: if settingId in ['config', 'hireme'];
       allow write: if isAdmin();
+    }
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
