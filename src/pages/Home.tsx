@@ -35,7 +35,7 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold font-heading mb-6 leading-none tracking-tighter"
+              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-heading mb-4 md:mb-6 leading-tight md:leading-none tracking-tighter"
             >
               {hero?.heading || "Hi, I'm Alex."}
             </motion.h1>
@@ -44,7 +44,7 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl md:text-2xl lg:text-3xl font-medium text-light-text mb-8"
+              className="text-lg md:text-2xl lg:text-3xl font-medium text-light-text mb-6 md:mb-8"
             >
               {hero?.subheading || "Graphic Designer | Brand Identity | Visual Storytelling"}
             </motion.h2>
@@ -53,7 +53,7 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-lg text-light-text max-w-lg mb-10 leading-relaxed"
+              className="text-base md:text-lg text-light-text max-w-lg mb-8 md:mb-10 leading-relaxed"
             >
               {hero?.description || "I create stunning visual experiences that help brands stand out. From logos to complete brand identities, I bring ideas to life through design."}
             </motion.p>
@@ -62,7 +62,7 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row gap-4"
             >
               <Link to={hero?.btn1Link || "/portfolio"}>
                 <Button>
@@ -157,7 +157,7 @@ export function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`p-10 rounded-[2rem] border relative ${tier.popular ? 'border-accent bg-accent/5 lg:scale-105 shadow-2xl shadow-accent/10 z-10' : 'border-black/5 dark:border-white/5 bg-white dark:bg-dark-card'} text-center flex flex-col`}
+                className={`p-6 md:p-10 rounded-[2rem] border relative ${tier.popular ? 'border-accent bg-accent/5 lg:scale-105 shadow-2xl shadow-accent/10 z-10' : 'border-black/5 dark:border-white/5 bg-white dark:bg-dark-card'} text-center flex flex-col`}
               >
                 {tier.popular && <span className="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">Most Popular</span>}
                 <h4 className="text-xl font-bold mb-2">{tier.name}</h4>
@@ -246,10 +246,10 @@ export function Home() {
       {/* CTA Banner */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-dark text-white rounded-[2.5rem] p-12 md:p-20 relative overflow-hidden text-center">
+          <div className="bg-dark text-white rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-20 relative overflow-hidden text-center">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.2),transparent)]" />
             <div className="relative z-10 max-w-2xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold font-heading mb-6 tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-bold font-heading mb-6 tracking-tight">
                 Have a project in mind?
               </h2>
               <p className="text-xl text-white/70 mb-10">

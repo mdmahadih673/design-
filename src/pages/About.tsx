@@ -38,12 +38,12 @@ export function About() {
     <div className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
         {/* About Hero */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center mb-20 md:mb-32">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="aspect-[4/5] rounded-[3rem] overflow-hidden"
+            className="aspect-[4/5] rounded-3xl md:rounded-[3rem] overflow-hidden"
           >
             <img 
               src={about?.photo || "https://images.unsplash.com/photo-1519085184628-66e7371f1140?q=80&w=800&auto=format&fit=crop"} 
@@ -80,7 +80,7 @@ export function About() {
         </section>
 
         {/* Skills & Stats */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-32">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 mb-20 md:mb-32">
           <div>
             <h2 className="text-3xl font-bold font-heading mb-10">Skills & Tools</h2>
             <div className="space-y-8">
@@ -104,7 +104,7 @@ export function About() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
             {facts.map((fact: any, i: number) => (
               <div key={i} className="p-8 rounded-3xl bg-black/5 dark:bg-white/5 relative overflow-hidden flex flex-col items-center justify-center text-center">
                 <div className="text-accent mb-4">

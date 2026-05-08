@@ -52,7 +52,7 @@ export function ProjectDetails() {
               <span className="inline-block bg-accent text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6 shadow-xl shadow-accent/20">
                 {category?.name || 'Design'}
               </span>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-heading text-white mb-8 tracking-tighter">
+              <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold font-heading text-white mb-8 tracking-tighter">
                 {project.title}
               </h1>
               <div className="flex flex-wrap justify-center gap-12 text-white/80 font-medium">
@@ -95,7 +95,7 @@ export function ProjectDetails() {
         </div>
 
         <div className="lg:sticky lg:top-24 h-fit">
-          <div className="bg-white dark:bg-dark-card p-10 rounded-[2.5rem] border border-black/5 dark:border-white/5 shadow-2xl shadow-black/5">
+            <div className="bg-white dark:bg-dark-card p-6 md:p-10 rounded-3xl md:rounded-[2.5rem] border border-black/5 dark:border-white/5 shadow-2xl shadow-black/5">
             <h3 className="text-xl font-bold font-heading mb-8">Quick Specs</h3>
             
             <div className="space-y-8">
@@ -151,7 +151,7 @@ export function ProjectDetails() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-[2.5rem] overflow-hidden shadow-2xl"
+            className="rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-2xl"
           >
             <img src={img} alt={`${project.title} gallery ${i}`} className="w-full h-auto" />
           </motion.div>

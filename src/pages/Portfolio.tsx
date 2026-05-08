@@ -27,10 +27,10 @@ export function Portfolio() {
           subtitle="A collection of my best graphic design work across various disciplines"
         />
 
-        <div className="flex flex-wrap gap-4 mb-12">
+        <div className="flex flex-wrap gap-2 md:gap-4 mb-12">
           <button
             onClick={() => setActiveCategory('all')}
-            className={`px-8 py-3 rounded-2xl font-bold transition-all border-2 ${
+            className={`px-5 py-2 md:px-8 md:py-3 rounded-xl md:rounded-2xl text-sm md:text-base font-bold transition-all border-2 ${
               activeCategory === 'all' 
                 ? 'bg-accent border-accent text-white shadow-lg shadow-accent/20' 
                 : 'border-black/5 dark:border-white/5 hover:border-accent/50'
@@ -42,7 +42,7 @@ export function Portfolio() {
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-8 py-3 rounded-2xl font-bold transition-all border-2 ${
+              className={`px-5 py-2 md:px-8 md:py-3 rounded-xl md:rounded-2xl text-sm md:text-base font-bold transition-all border-2 ${
                 activeCategory === category.id 
                   ? 'bg-accent border-accent text-white shadow-lg shadow-accent/20' 
                   : 'border-black/5 dark:border-white/5 hover:border-accent/50'
@@ -55,7 +55,7 @@ export function Portfolio() {
 
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
@@ -66,6 +66,7 @@ export function Portfolio() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
+                className="break-inside-avoid"
               >
                 <ProjectCard project={project} />
               </motion.div>

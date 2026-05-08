@@ -1,10 +1,17 @@
 import { MessageCircle } from 'lucide-react';
 import { motion } from 'motion/react';
+import { usePortfolioData } from '../hooks/usePortfolioData';
 
 export function WhatsAppButton() {
+  const { settings } = usePortfolioData();
+  
+  if (settings?.whatsappEnabled === false) return null;
+
+  const phoneNumber = settings?.whatsappNumber || '8801608171029';
+
   return (
     <motion.a
-      href="https://wa.me/1234567890" 
+      href={`https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}`} 
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}

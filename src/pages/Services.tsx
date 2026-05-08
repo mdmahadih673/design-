@@ -58,7 +58,7 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group p-10 rounded-[2.5rem] bg-white dark:bg-dark-card border border-black/5 dark:border-white/5 hover:border-accent shadow-xl shadow-transparent hover:shadow-accent/5 transition-all flex flex-col"
+              className="group p-6 md:p-10 rounded-3xl md:rounded-[2.5rem] bg-white dark:bg-dark-card border border-black/5 dark:border-white/5 hover:border-accent shadow-xl shadow-transparent hover:shadow-accent/5 transition-all flex flex-col"
             >
               <h3 className="text-2xl font-bold font-heading mb-4 group-hover:text-accent transition-colors">
                 {service.title}
@@ -108,7 +108,7 @@ export function Services() {
            <SectionHeading title="Simple Pricing" />
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
               {displayPricing.map((tier, i) => (
-                <div key={i} className={`p-10 rounded-[2rem] border relative ${tier.popular ? 'border-accent bg-accent/5 lg:scale-105 shadow-2xl shadow-accent/10 z-10' : 'border-black/5 dark:border-white/5 bg-white dark:bg-dark-card'} text-center flex flex-col`}>
+                <div key={i} className={`p-6 md:p-10 rounded-[2rem] border relative ${tier.popular ? 'border-accent bg-accent/5 lg:scale-105 shadow-2xl shadow-accent/10 z-10' : 'border-black/5 dark:border-white/5 bg-white dark:bg-dark-card'} text-center flex flex-col`}>
                   {tier.popular && <span className="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">Most Popular</span>}
                   <h4 className="text-xl font-bold mb-2">{tier.name}</h4>
                   <div className="text-4xl font-bold mb-8 text-accent">{tier.price}</div>
