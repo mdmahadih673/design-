@@ -7,10 +7,21 @@ import { Plus, Trash2, Tag, Hash, Loader2, AlertCircle } from 'lucide-react';
 export function CategoriesManager() {
   const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [newItem, setNewItem] = useState({ name: '' });
+  const [newItem, setNewItem] = useState({ name: '', color: '#3B82F6' });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [editingItem, setEditingItem] = useState<any>(null);
+
+  const colors = [
+    '#3B82F6', // Blue
+    '#EF4444', // Red
+    '#10B981', // Green
+    '#F59E0B', // Amber
+    '#8B5CF6', // Violet
+    '#EC4899', // Pink
+    '#6366F1', // Indigo
+    '#14B8A6', // Teal
+  ];
 
   useEffect(() => { fetchItems(); }, []);
 
@@ -41,13 +52,14 @@ export function CategoriesManager() {
       const payload = { 
         name: newItem.name.trim(), 
         slug,
+        color: newItem.color,
         createdAt: new Date().toISOString()
       };
       console.log('Attempting to add category:', payload);
       
       const docRef = await addDoc(collection(db, 'categories'), payload);
       console.log('Category added successfully with ID:', docRef.id);
-      setNewItem({ name: '' });
+      setNewItem({ name: '', color: '#3B82F6' });
       fetchItems();
     } catch (err: any) {
       console.error('FULL Error adding category:', err);
@@ -82,6 +94,7 @@ export function CategoriesManager() {
         ...data,
         name: editingItem.name.trim(), 
         slug,
+        color: editingItem.color || '#3B82F6',
         updatedAt: new Date().toISOString()
       });
       setEditingItem(null);
@@ -120,37 +133,61 @@ export function CategoriesManager() {
       </div>
 
       <div className="bg-white dark:bg-dark-card p-8 rounded-3xl border border-black/5 dark:border-white/5 shadow-xl">
-        <form onSubmit={editingItem ? handleUpdate : handleAdd} className="flex gap-4 mb-3">
-          <div className="flex-grow relative">
-            <Tag className="absolute left-6 top-1/2 -translate-y-1/2 text-light-text" size={18} />
-            <input 
-              placeholder={editingItem ? "Rename category..." : "e.g. Identity Design"}
-              disabled={saving}
-              value={editingItem ? editingItem.name : newItem.name}
-              onChange={(e) => editingItem 
-                ? setEditingItem({ ...editingItem, name: e.target.value })
-                : setNewItem({ name: e.target.value })
-              }
-              className="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl pl-14 pr-6 py-4 outline-none focus:border-accent transition-all text-black dark:text-white"
-            />
-          </div>
-          <div className="flex gap-2">
-            {editingItem && (
-              <Button 
-                type="button" 
-                variant="outline" 
-                onClick={() => setEditingItem(null)}
+        <div className="flex flex-col gap-4 mb-3">
+          <form onSubmit={editingItem ? handleUpdate : handleAdd} className="flex gap-4">
+            <div className="flex-grow relative">
+              <Tag className="absolute left-6 top-1/2 -translate-y-1/2 text-light-text" size={18} />
+              <input 
+                placeholder={editingItem ? "Rename category..." : "e.g. Identity Design"}
                 disabled={saving}
-              >
-                Cancel
+                value={editingItem ? editingItem.name : newItem.name}
+                onChange={(e) => editingItem 
+                  ? setEditingItem({ ...editingItem, name: e.target.value })
+                  : setNewItem({ ...newItem, name: e.target.value })
+                }
+                className="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl pl-14 pr-6 py-4 outline-none focus:border-accent transition-all text-black dark:text-white"
+              />
+            </div>
+            <div className="flex gap-2">
+              {editingItem && (
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={() => setEditingItem(null)}
+                  disabled={saving}
+                >
+                  Cancel
+                </Button>
+              )}
+              <Button type="submit" className="gap-2 px-8 min-w-[120px]" disabled={saving || (editingItem ? !editingItem.name : !newItem.name)}>
+                {saving ? <Loader2 size={18} className="animate-spin" /> : (editingItem ? <Tag size={18} /> : <Plus size={18} />)}
+                {saving ? (editingItem ? 'Updating...' : 'Adding...') : (editingItem ? 'Update' : 'Add')}
               </Button>
-            )}
-            <Button type="submit" className="gap-2 px-8 min-w-[120px]" disabled={saving || (editingItem ? !editingItem.name : !newItem.name)}>
-              {saving ? <Loader2 size={18} className="animate-spin" /> : (editingItem ? <Tag size={18} /> : <Plus size={18} />)}
-              {saving ? (editingItem ? 'Updating...' : 'Adding...') : (editingItem ? 'Update' : 'Add')}
-            </Button>
+            </div>
+          </form>
+
+          <div className="flex flex-wrap gap-3 items-center p-4 bg-black/5 dark:bg-white/5 rounded-2xl">
+            <span className="text-[10px] text-light-text uppercase tracking-widest font-bold">Pick Color:</span>
+            <div className="flex flex-wrap gap-2">
+              {colors.map(color => (
+                <button
+                  key={color}
+                  type="button"
+                  onClick={() => editingItem 
+                    ? setEditingItem({ ...editingItem, color }) 
+                    : setNewItem({ ...newItem, color })
+                  }
+                  className={`w-8 h-8 rounded-full border-2 transition-all ${
+                    (editingItem ? editingItem.color === color : newItem.color === color)
+                      ? 'border-white scale-110 shadow-lg' 
+                      : 'border-transparent hover:scale-105'
+                  }`}
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </div>
           </div>
-        </form>
+        </div>
 
         <div className="flex flex-wrap gap-2 mb-8">
           <span className="text-[10px] text-light-text uppercase tracking-widest font-bold self-center mr-2">Suggestions:</span>
@@ -158,7 +195,7 @@ export function CategoriesManager() {
             <button
               key={cat}
               type="button"
-              onClick={() => setNewItem({ name: cat })}
+              onClick={() => setNewItem({ ...newItem, name: cat })}
               className="px-3 py-1.5 bg-accent/5 hover:bg-accent/10 border border-accent/20 rounded-full text-[10px] uppercase tracking-widest font-bold text-accent transition-all"
             >
               + {cat}
@@ -185,7 +222,10 @@ export function CategoriesManager() {
                 className="flex items-center justify-between p-5 bg-black/2 dark:bg-white/2 rounded-2xl border border-black/5 dark:border-white/5 group hover:border-accent transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+                  <div 
+                    className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors"
+                    style={{ backgroundColor: `${item.color || '#3B82F6'}20`, color: item.color || '#3B82F6' }}
+                  >
                     <Hash size={18} />
                   </div>
                   <div>

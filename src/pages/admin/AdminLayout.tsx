@@ -25,21 +25,21 @@ import { cn } from '@/src/lib/utils';
 import { motion } from 'motion/react';
 
 const MENU_ITEMS = [
-  { icon: LayoutDashboard, label: 'Dashboard', path: '/admin/dashboard' },
-  { icon: Image, label: 'Hero Section', path: '/admin/hero' },
-  { icon: User, label: 'About Me', path: '/admin/about' },
-  { icon: Briefcase, label: 'Portfolio', path: '/admin/projects' },
-  { icon: Layers, label: 'Categories', path: '/admin/categories' },
-  { icon: Plus, label: 'Services', path: '/admin/services' },
-  { icon: CreditCard, label: 'Pricing', path: '/admin/pricing' },
-  { icon: Star, label: 'Testimonials', path: '/admin/testimonials' },
-  { icon: FileText, label: 'Blog', path: '/admin/blog' },
-  { icon: Mail, label: 'Hire Me (Inquiries)', path: '/admin/messages' },
-  { icon: UserPlus, label: 'Hire Me Settings', path: '/admin/hire-me-settings' },
-  { icon: Share2, label: 'Social Links', path: '/admin/social-links' },
-  { icon: Globe, label: 'SEO Settings', path: '/admin/seo' },
-  { icon: Settings, label: 'General Settings', path: '/admin/settings' },
-  { icon: Database, label: 'Seed Data', path: '/admin/seed' },
+  { icon: LayoutDashboard, label: 'Dashboard', path: '/studio/dashboard' },
+  { icon: Image, label: 'Hero Section', path: '/studio/hero' },
+  { icon: User, label: 'About Me', path: '/studio/about' },
+  { icon: Briefcase, label: 'Portfolio', path: '/studio/projects' },
+  { icon: Layers, label: 'Categories', path: '/studio/categories' },
+  { icon: Plus, label: 'Services', path: '/studio/services' },
+  { icon: CreditCard, label: 'Pricing', path: '/studio/pricing' },
+  { icon: Star, label: 'Testimonials', path: '/studio/testimonials' },
+  { icon: FileText, label: 'Blog', path: '/studio/blog' },
+  { icon: Mail, label: 'Hire Me (Inquiries)', path: '/studio/messages' },
+  { icon: UserPlus, label: 'Hire Me Settings', path: '/studio/hire-me-settings' },
+  { icon: Share2, label: 'Social Links', path: '/studio/social-links' },
+  { icon: Globe, label: 'SEO Settings', path: '/studio/seo' },
+  { icon: Settings, label: 'General Settings', path: '/studio/settings' },
+  { icon: Database, label: 'Seed Data', path: '/studio/seed' },
 ];
 
 export function AdminLayout({ children }: { children: ReactNode }) {
@@ -53,14 +53,14 @@ export function AdminLayout({ children }: { children: ReactNode }) {
     </div>
   );
 
-  if (!user || !isAdmin) return <Navigate to="/admin" />;
+  if (!user || !isAdmin) return <Navigate to="/studio" />;
 
   return (
     <div className="flex min-h-screen bg-slate-50 dark:bg-dark group">
       {/* Sidebar */}
       <aside className="w-64 flex-shrink-0 bg-white dark:bg-dark-card border-r border-black/5 dark:border-white/5 flex flex-col sticky top-0 h-screen overflow-y-auto">
         <div className="p-8 border-b border-black/5 dark:border-white/5">
-          <Link to="/admin/dashboard" className="text-xl font-bold font-heading tracking-tighter block text-center">
+          <Link to="/studio/dashboard" className="text-xl font-bold font-heading tracking-tighter block text-center">
             ADMIN<span className="text-accent">DASH</span>
           </Link>
         </div>

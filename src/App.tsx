@@ -79,10 +79,10 @@ export default function App() {
           <Router>
             <div className="min-h-screen font-sans bg-white dark:bg-dark text-slate-900 dark:text-white flex flex-col">
               <Routes>
-                {/* Admin Routes */}
-                <Route path="/admin" element={<AdminLogin />} />
+                {/* Hidden Admin Routes - only accessible via /studio */}
+                <Route path="/studio" element={<AdminLogin />} />
                 <Route 
-                  path="/admin/*" 
+                  path="/studio/*" 
                   element={
                     <AdminLayout>
                       <Routes>

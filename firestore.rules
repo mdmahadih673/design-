@@ -8,8 +8,8 @@ service cloud.firestore {
     
     function isAdmin() {
       return isSignedIn() && (
-        request.auth.token.email.matches('(?i)mdmahadih673@gmail\\.com') || 
-        request.auth.token.email.matches('(?i)admin@portfolio\\.com')
+        request.auth.token.email.lower() == 'mdmahadih673@gmail.com' || 
+        request.auth.token.email.lower() == 'admin@portfolio.com'
       );
     }
 
@@ -54,7 +54,7 @@ service cloud.firestore {
 
     // Services
     match /services/{serviceId} {
-      allow read: if (resource != null && resource.data.get('status', '') == 'active') || isAdmin();
+      allow read: if (resource != null && resource.data.get('status', '') == 'active') || serviceId == 'settings' || isAdmin();
       allow write: if isAdmin();
     }
 

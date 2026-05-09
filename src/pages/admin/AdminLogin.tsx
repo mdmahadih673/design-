@@ -20,7 +20,7 @@ export function AdminLogin() {
     
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/admin/dashboard');
+      navigate('/studio/dashboard');
     } catch (err: any) {
       setError(err.message || 'Failed to login');
     } finally {
@@ -52,7 +52,7 @@ export function AdminLogin() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      navigate('/admin/dashboard');
+      navigate('/studio/dashboard');
     } catch (err: any) {
       setError(err.message || 'Failed to login with Google');
     } finally {

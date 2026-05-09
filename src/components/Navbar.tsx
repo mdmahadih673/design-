@@ -61,15 +61,6 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
-          {isAdmin && (
-            <Link
-              to="/admin/dashboard"
-              className="flex items-center gap-2 text-sm font-bold text-accent hover:opacity-80 transition-opacity px-4 py-2 bg-accent/10 rounded-full border border-accent/20"
-            >
-              <LayoutDashboard size={14} />
-              Dashboard
-            </Link>
-          )}
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
@@ -82,14 +73,6 @@ export function Navbar() {
           >
             Hire Me
           </Link>
-          {!user && (
-            <Link
-              to="/admin"
-              className="text-xs font-bold text-light-text hover:text-accent transition-colors"
-            >
-              Login
-            </Link>
-          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -128,29 +111,12 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              {isAdmin && (
-                <Link
-                  to="/admin/dashboard"
-                  className="flex items-center gap-2 text-lg font-bold text-accent py-2"
-                >
-                  <LayoutDashboard size={18} />
-                  Dashboard
-                </Link>
-              )}
               <Link
                 to="/contact"
                 className="bg-accent text-white text-center py-3 rounded-xl font-semibold"
               >
                 Hire Me
               </Link>
-              {!user && (
-                <Link
-                  to="/admin"
-                  className="text-center text-sm font-bold text-light-text py-2"
-                >
-                  Admin Login
-                </Link>
-              )}
             </div>
           </motion.div>
         )}
