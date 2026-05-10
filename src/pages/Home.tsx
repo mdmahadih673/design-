@@ -23,7 +23,7 @@ export function Home() {
       <section className="relative min-h-[85vh] lg:min-h-[90vh] flex items-center px-6 pt-24 lg:pt-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.05),transparent)] dark:bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.1),transparent)]" />
         
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl font-bold font-heading mb-4 md:mb-6 leading-[1.1] tracking-tighter"
+              className="text-[2.5rem] xs:text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-bold font-heading mb-4 md:mb-6 leading-[1.1] tracking-tighter"
             >
               {hero?.heading || "MD Mahadi Hasan"}
             </motion.h1>
@@ -45,7 +45,7 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-base sm:text-xl md:text-2xl font-medium text-light-text mb-5 md:mb-8"
+              className="text-sm sm:text-lg md:text-xl lg:text-2xl font-medium text-accent mb-6 md:mb-8 tracking-widest uppercase font-mono"
             >
               {hero?.subheading || "Creative Designer | Brand Identity Specialist"}
             </motion.h2>
@@ -54,7 +54,7 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-sm sm:text-base md:text-lg text-light-text max-w-lg mx-auto lg:mx-0 mb-8 md:mb-10 leading-relaxed opacity-80"
+              className="text-sm sm:text-base md:text-lg text-light-text max-w-lg mx-auto lg:mx-0 mb-8 md:mb-12 leading-relaxed opacity-75 font-medium px-4 sm:px-0"
             >
               {hero?.description || "I Build Brands That Speak Without Words."}
             </motion.p>
@@ -66,12 +66,14 @@ export function Home() {
               className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
             >
               <Link to={hero?.btn1Link || "/portfolio"} className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto px-8">
+                <Button className="w-full sm:w-auto px-8 py-6 sm:py-4 text-base shadow-xl shadow-accent/20">
                   {hero?.btn1Text || "View My Work"}
                 </Button>
               </Link>
               <Link to={hero?.btn2Link || "/contact"} className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full sm:w-auto px-8">{hero?.btn2Text || "Hire Me"}</Button>
+                <Button variant="outline" className="w-full sm:w-auto px-8 py-6 sm:py-4 text-base border-accent/20 hover:border-accent">
+                  {hero?.btn2Text || "Hire Me"}
+                </Button>
               </Link>
             </motion.div>
           </motion.div>
@@ -96,12 +98,12 @@ export function Home() {
       </section>
 
       {/* Featured Work Preview */}
-      <section className="py-20 md:py-28 px-6 relative overflow-hidden">
+      <section className="py-16 md:py-28 px-6 relative overflow-hidden">
         {/* Decorative background element */}
         <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-accent/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-16 text-center md:text-left">
             <div>
               <motion.span 
                 initial={{ opacity: 0, x: -20 }}
@@ -112,45 +114,45 @@ export function Home() {
                 Selected Work
               </motion.span>
               <h2 className="text-4xl md:text-6xl font-bold font-heading tracking-tighter leading-tight">
-                Featured <br /> Projects
+                Featured <br className="hidden md:block" /> Projects
               </h2>
             </div>
-            <p className="text-light-text text-base md:text-xl max-w-md leading-relaxed opacity-80">
+            <p className="text-light-text text-sm sm:text-base md:text-xl max-w-md mx-auto md:mx-0 leading-relaxed opacity-80">
               Explore my most impactful visual identities, marketing designs, and creative case studies.
             </p>
           </div>
           
-          <div className="space-y-12 md:space-y-16">
+          <div className="space-y-10 md:space-y-16">
             {/* LARGE FEATURED PROJECT */}
-            {projects.filter(p => p.isFeatured).slice(0, 1).map((project) => (
+            {projects.filter(p => (p as any).isFeatured).slice(0, 1).map((project) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-[2rem] bg-dark-card aspect-[16/9] lg:aspect-[21/8]"
+                className="group relative overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-dark-card aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/8]"
               >
                 <img
                   src={project.thumbnail}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/10 to-transparent flex flex-col justify-end p-6 md:p-14">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-14">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                   >
-                    <span className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-md rounded-full text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
+                    <span className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-md rounded-full text-accent text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] mb-3 md:mb-4">
                       Case Study — {project.categoryName}
                     </span>
-                    <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 max-w-2xl leading-[1.1] tracking-tighter">
+                    <h3 className="text-2xl md:text-5xl font-bold text-white mb-5 md:mb-6 max-w-2xl leading-[1.2] md:leading-[1.1] tracking-tight md:tracking-tighter">
                       {project.title}
                     </h3>
                     <Link to={`/portfolio/${project.id}`}>
-                      <Button className="px-10 py-5 group/btn shadow-2xl shadow-accent/20">
+                      <Button className="w-full sm:w-auto px-10 py-5 group/btn shadow-2xl shadow-accent/20">
                         View Project 
-                        <ArrowRight className="ml-2 group-hover/btn:translate-x-1 transition-transform" size={20} />
+                        <ArrowRight className="ml-2 group-hover/btn:translate-x-1 transition-transform" size={18} />
                       </Button>
                     </Link>
                   </motion.div>
@@ -158,19 +160,17 @@ export function Home() {
               </motion.div>
             ))}
             
-            {/* SECONDARY PROJECTS GRID - Now using columns for masonry effect to support dynamic design sizes */}
-            <div className="columns-1 sm:columns-2 md:columns-3 gap-6 md:gap-8 space-y-6 md:space-y-8">
-              {projects.filter(p => p.isFeatured).slice(1, 10).map((project) => (
-                <div key={project.id} className="break-inside-avoid">
-                  <ProjectCard project={project} />
-                </div>
+            {/* SECONDARY PROJECTS GRID */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {projects.filter(p => (p as any).isFeatured).slice(1, 10).map((project) => (
+                <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           </div>
           
-          <div className="mt-16 md:mt-20 text-center">
-            <Link to="/portfolio">
-              <Button variant="outline" size="lg" className="group px-10 py-6 rounded-xl border-white/10 hover:border-accent">
+          <div className="mt-12 md:mt-20 text-center">
+            <Link to="/portfolio" className="inline-block w-full sm:w-auto px-4">
+              <Button variant="outline" size="lg" className="w-full group px-10 py-6 rounded-xl border-white/10 hover:border-accent">
                 Explore Full Portfolio <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -187,7 +187,7 @@ export function Home() {
             align="left"
           />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {services.slice(0, 4).map((service, index) => (
               <ServiceCard key={service.id} service={service} index={index} />
             ))}
@@ -204,7 +204,7 @@ export function Home() {
             align="center"
           />
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
             {(pricing.length > 0 ? pricing : [
               { name: 'Basic', price: '$299', features: ['1 Logo Concept', '3 Revisions', 'Final Files (PNG/JPG)', 'Brand Guide'] },
               { name: 'Standard', price: '$599', popular: true, features: ['3 Logo Concepts', 'Unlimited Revisions', 'Full Identity', 'Stationary Design'] },
@@ -235,7 +235,7 @@ export function Home() {
 
       {/* Quick Stats */}
       <section className="py-20 bg-accent text-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 lg:gap-12 text-center">
           {(about?.achievements || [
             { label: 'Projects Completed', value: '50+' },
             { label: 'Happy Clients', value: '30+' },
@@ -251,13 +251,13 @@ export function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="flex justify-center mb-4 text-white/80">
-                  {icons[i] || <Trophy />}
+                <div className="flex justify-center mb-4 text-white/50">
+                  {icons[i] || <Trophy size={20} />}
                 </div>
-                <div className="text-4xl font-bold font-heading mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-2">
                   <CountUp end={parseInt(stat.value)} suffix={stat.value.replace(/\d+/g, '')} />
                 </div>
-                <div className="text-accent-foreground text-sm font-medium uppercase tracking-widest">
+                <div className="text-white/80 text-[10px] sm:text-xs font-bold uppercase tracking-widest px-2">
                   {stat.label}
                 </div>
               </motion.div>

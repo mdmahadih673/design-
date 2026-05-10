@@ -37,14 +37,14 @@ export function Navbar() {
     <nav
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4',
-        scrolled
-          ? 'bg-white/80 dark:bg-dark/80 backdrop-blur-md shadow-lg py-3'
+        scrolled || isOpen
+          ? 'bg-white dark:bg-dark-card shadow-lg py-3'
           : 'bg-transparent'
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link to="/" className="text-2xl font-bold font-heading tracking-tighter">
-          DESIGN<span className="text-accent">ELITE</span>
+        <Link to="/" className="text-xl md:text-2xl font-bold font-heading tracking-tighter">
+          DESIGN<span className="text-accent underline decoration-accent/30 underline-offset-4">ELITE</span>
         </Link>
 
         {/* Desktop Links */}
@@ -69,54 +69,73 @@ export function Navbar() {
           </button>
           <Link
             to="/contact"
-            className="bg-accent text-white px-5 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+            className="bg-accent text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
           >
             Hire Me
           </Link>
         </div>
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center space-x-4">
+        {/* Mobile Controls */}
+        <div className="md:hidden flex items-center space-x-3">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10"
+            className="p-2 rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
           >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-          <button onClick={() => setIsOpen(!isOpen)} className="p-2">
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <button 
+            onClick={() => setIsOpen(!isOpen)} 
+            className="p-2.5 rounded-xl bg-accent text-white shadow-lg shadow-accent/20"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white dark:bg-dark-card border-t border-black/5 dark:border-white/5 overflow-hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-dark-card border-t border-black/5 dark:border-white/5 shadow-2xl overflow-hidden"
           >
-            <div className="flex flex-col p-6 space-y-4">
-              {NAV_LINKS.map((link) => (
-                <Link
+            <div className="flex flex-col p-6 space-y-2">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
                   key={link.path}
-                  to={link.path}
-                  className={cn(
-                    'text-lg font-medium',
-                    location.pathname === link.path ? 'text-accent' : ''
-                  )}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
                 >
-                  {link.name}
-                </Link>
+                  <Link
+                    to={link.path}
+                    className={cn(
+                      'block py-3 px-4 rounded-xl text-lg font-medium transition-all active:scale-95',
+                      location.pathname === link.path 
+                        ? 'bg-accent/10 text-accent' 
+                        : 'hover:bg-black/5 dark:hover:bg-white/5'
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
-              <Link
-                to="/contact"
-                className="bg-accent text-white text-center py-3 rounded-xl font-semibold"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: NAV_LINKS.length * 0.05 }}
+                className="pt-4"
               >
-                Hire Me
-              </Link>
+                <Link
+                  to="/contact"
+                  className="block bg-accent text-white text-center py-4 rounded-xl font-bold shadow-xl shadow-accent/20 active:scale-95 transition-transform"
+                >
+                  Hire Me
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}

@@ -20,15 +20,15 @@ export function Footer() {
   return (
     <footer className="bg-white dark:bg-dark-card border-t border-black/5 dark:border-white/5 pt-16 pb-8 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div className="col-span-1 md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 text-center md:text-left">
+          <div className="col-span-1 md:col-span-2 flex flex-col items-center md:items-start">
             <Link to="/" className="text-2xl font-bold font-heading tracking-tighter mb-4 block">
-              DESIGN<span className="text-accent">ELITE</span>
+              DESIGN<span className="text-accent underline decoration-accent/30 underline-offset-4">ELITE</span>
             </Link>
-            <p className="text-light-text max-w-sm mb-6">
+            <p className="text-light-text max-w-sm mb-8 leading-relaxed">
               Creating stunning visual experiences that help brands stand out. From logos to complete brand identities, I bring ideas to life through design.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex flex-wrap justify-center md:justify-start gap-4">
               {socialLinks && socialLinks.map((link: any) => {
                 const Icon = ICON_MAP[link.platform.toLowerCase()] || Share2;
                 return (
@@ -37,11 +37,11 @@ export function Footer() {
                     href={link.url} 
                     target="_blank" 
                     rel="noreferrer" 
-                    className="p-3 bg-black/5 dark:bg-white/5 rounded-2xl hover:bg-accent hover:text-white transition-all group relative"
+                    className="p-3.5 bg-black/5 dark:bg-white/5 rounded-xl hover:bg-accent hover:text-white transition-all group relative border border-black/5 dark:border-white/5"
                     title={link.platform}
                   >
-                    <Icon size={18} />
-                    <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-dark text-white px-2 py-1 rounded text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Icon size={20} />
+                    <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-dark text-white px-2 py-1 rounded text-[10px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       {link.platform}
                     </span>
                   </a>
