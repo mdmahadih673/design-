@@ -6,6 +6,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './lib/ThemeContext';
 import { AdminProvider } from './lib/AdminContext';
+import { PortfolioProvider } from './context/PortfolioContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
@@ -75,8 +76,9 @@ export default function App() {
   return (
     <ErrorBoundary>
       <AdminProvider>
-        <ThemeProvider>
-          <Router>
+        <PortfolioProvider>
+          <ThemeProvider>
+            <Router>
             <div className="min-h-screen font-sans bg-white dark:bg-dark text-slate-900 dark:text-white flex flex-col">
               <Routes>
                 {/* Hidden Admin Routes - only accessible via /studio */}
@@ -134,7 +136,8 @@ export default function App() {
             </div>
           </Router>
         </ThemeProvider>
-      </AdminProvider>
-    </ErrorBoundary>
-  );
+      </PortfolioProvider>
+    </AdminProvider>
+  </ErrorBoundary>
+);
 }

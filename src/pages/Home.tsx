@@ -20,74 +20,75 @@ export function Home() {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center px-6 pt-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.1),transparent)] dark:bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.15),transparent)]" />
+      <section className="relative min-h-[85vh] lg:min-h-[90vh] flex items-center px-6 pt-24 lg:pt-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.05),transparent)] dark:bg-[radial-gradient(circle_at_70%_30%,rgba(37,99,235,0.1),transparent)]" />
         
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="text-center lg:text-left order-2 lg:order-1"
           >
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-heading mb-4 md:mb-6 leading-tight md:leading-none tracking-tighter"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl font-bold font-heading mb-4 md:mb-6 leading-[1.1] tracking-tighter"
             >
-              {hero?.heading || "Hi, I'm Alex."}
+              {hero?.heading || "MD Mahadi Hasan"}
             </motion.h1>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-lg md:text-2xl lg:text-3xl font-medium text-light-text mb-6 md:mb-8"
+              className="text-base sm:text-xl md:text-2xl font-medium text-light-text mb-5 md:mb-8"
             >
-              {hero?.subheading || "Graphic Designer | Brand Identity | Visual Storytelling"}
+              {hero?.subheading || "Creative Designer | Brand Identity Specialist"}
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-base md:text-lg text-light-text max-w-lg mb-8 md:mb-10 leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-light-text max-w-lg mx-auto lg:mx-0 mb-8 md:mb-10 leading-relaxed opacity-80"
             >
-              {hero?.description || "I create stunning visual experiences that help brands stand out. From logos to complete brand identities, I bring ideas to life through design."}
+              {hero?.description || "I Build Brands That Speak Without Words."}
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
             >
-              <Link to={hero?.btn1Link || "/portfolio"}>
-                <Button>
+              <Link to={hero?.btn1Link || "/portfolio"} className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto px-8">
                   {hero?.btn1Text || "View My Work"}
                 </Button>
               </Link>
-              <Link to={hero?.btn2Link || "/contact"}>
-                <Button variant="outline">{hero?.btn2Text || "Hire Me"}</Button>
+              <Link to={hero?.btn2Link || "/contact"} className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full sm:w-auto px-8">{hero?.btn2Text || "Hire Me"}</Button>
               </Link>
             </motion.div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 1, ease: 'easeOut' }}
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center lg:justify-end order-1 lg:order-2"
           >
-            <div className="relative w-72 h-72 md:w-96 md:h-96">
-              <div className="absolute inset-0 bg-accent rounded-3xl rotate-6 blur-2xl opacity-20 animate-pulse" />
+            <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none aspect-[4/3] lg:aspect-auto">
+              <div className="absolute inset-0 bg-accent rounded-3xl blur-[80px] opacity-10 animate-pulse lg:blur-3xl" />
               <img
-                src={hero?.profilePhoto || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop"}
-                alt="Profile"
-                className="w-full h-full object-cover rounded-3xl relative z-10 grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
+                src={hero?.profilePhoto || "input_file_1.png"}
+                alt="MD Mahadi Hasan"
+                className="w-full h-full object-cover rounded-[2rem] relative z-10 transition-all duration-700 shadow-2xl border border-white/5"
               />
             </div>
           </motion.div>
