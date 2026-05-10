@@ -95,99 +95,96 @@ export function Home() {
       </section>
 
       {/* Featured Work Preview */}
-      <section className="py-20 md:py-32 px-6 relative overflow-hidden">
+      <section className="py-20 md:py-28 px-6 relative overflow-hidden">
+        {/* Decorative background element */}
+        <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-accent/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24">
-            <div className="relative">
-              <motion.div
-                initial={{ opacity: 0, width: 0 }}
-                whileInView={{ opacity: 1, width: '4rem' }}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
+            <div>
+              <motion.span 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="h-[1px] bg-accent mb-6"
-              />
-              <h2 className="text-4xl md:text-7xl font-bold font-heading tracking-tighter leading-[0.9]">
-                Featured <br />
-                <span className="text-transparent border-t-text stroke-white" style={{ WebkitTextStroke: '1px rgba(var(--text-color), 0.2)' }}>Projects</span>
+                className="text-accent text-xs font-bold uppercase tracking-[0.3em] mb-3 block"
+              >
+                Selected Work
+              </motion.span>
+              <h2 className="text-4xl md:text-6xl font-bold font-heading tracking-tighter leading-tight">
+                Featured <br /> Projects
               </h2>
             </div>
-            <div className="md:max-w-xs">
-              <p className="text-light-text text-sm md:text-base leading-relaxed mb-6 opacity-70">
-                A selection of high-impact design solutions across branding, social media, and visual identity.
-              </p>
-              <Link to="/portfolio" className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-accent">
-                View All <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+            <p className="text-light-text text-base md:text-xl max-w-md leading-relaxed opacity-80">
+              Explore my most impactful visual identities, marketing designs, and creative case studies.
+            </p>
           </div>
           
-          <div className="space-y-16 md:space-y-24">
-            {/* THE SHOWCASE PROJECT */}
+          <div className="space-y-12 md:space-y-16">
+            {/* LARGE FEATURED PROJECT */}
             {projects.filter(p => p.isFeatured).slice(0, 1).map((project) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="group relative"
+                className="group relative overflow-hidden rounded-[2rem] bg-dark-card aspect-[16/9] lg:aspect-[21/8]"
               >
-                <Link to={`/portfolio/${project.id}`}>
-                  <div className="relative overflow-hidden rounded-[2rem] bg-dark-card border border-white/5 shadow-2xl">
-                    <img
-                      src={project.thumbnail}
-                      alt={project.title}
-                      className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-12 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-                      <div className="max-w-2xl">
-                        <span className="inline-block mb-3 px-3 py-1 bg-accent/20 backdrop-blur-md rounded-full text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
-                          {project.categoryName}
-                        </span>
-                        <h3 className="text-2xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
-                          {project.title}
-                        </h3>
-                        <p className="hidden md:block text-white/60 text-sm mb-6 line-clamp-2 max-w-lg">
-                          {project.description}
-                        </p>
-                        <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-[0.2em] group-hover:gap-4 transition-all">
-                          Read Case Study <ArrowRight size={16} className="text-accent" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+                <img
+                  src={project.thumbnail}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/10 to-transparent flex flex-col justify-end p-6 md:p-14">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <span className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-md rounded-full text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
+                      Case Study — {project.categoryName}
+                    </span>
+                    <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 max-w-2xl leading-[1.1] tracking-tighter">
+                      {project.title}
+                    </h3>
+                    <Link to={`/portfolio/${project.id}`}>
+                      <Button className="px-10 py-5 group/btn shadow-2xl shadow-accent/20">
+                        View Project 
+                        <ArrowRight className="ml-2 group-hover/btn:translate-x-1 transition-transform" size={20} />
+                      </Button>
+                    </Link>
+                  </motion.div>
+                </div>
               </motion.div>
             ))}
-
-            {/* STAGGERED GRID */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-              {projects.filter(p => p.isFeatured).slice(1, 4).map((project, index) => (
-                <div key={project.id} className={index % 2 === 1 ? 'md:mt-12' : ''}>
+            
+            {/* SECONDARY PROJECTS GRID - Now using columns for masonry effect to support dynamic design sizes */}
+            <div className="columns-1 sm:columns-2 md:columns-3 gap-6 md:gap-8 space-y-6 md:space-y-8">
+              {projects.filter(p => p.isFeatured).slice(1, 10).map((project) => (
+                <div key={project.id} className="break-inside-avoid">
                   <ProjectCard project={project} />
                 </div>
               ))}
             </div>
           </div>
+          
+          <div className="mt-16 md:mt-20 text-center">
+            <Link to="/portfolio">
+              <Button variant="outline" size="lg" className="group px-10 py-6 rounded-xl border-white/10 hover:border-accent">
+                Explore Full Portfolio <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Services Overview */}
-      <section className="py-32 px-6 bg-black relative">
+      <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20 relative">
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              className="absolute -top-10 left-1/2 -translate-x-1/2 w-24 h-[1px] bg-accent origin-center"
-            />
-            <h2 className="text-5xl md:text-7xl font-bold font-heading mb-6 tracking-tighter text-white">What I Do</h2>
-            <p className="text-white/50 text-lg max-w-2xl mx-auto">
-              Professional services tailored to your brand needs. I combine creativity with strategy to deliver results.
-            </p>
-            <div className="mt-8 flex justify-center">
-              <div className="w-12 h-1.5 bg-accent rounded-full" />
-            </div>
-          </div>
+          <SectionHeading 
+            title="What I Do" 
+            subtitle="Professional services tailored to your brand needs"
+            align="left"
+          />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.slice(0, 4).map((service, index) => (
@@ -269,51 +266,34 @@ export function Home() {
       </section>
 
       {/* Testimonials Preview */}
-      <section className="py-32 px-6 bg-white dark:bg-dark relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-black/5 dark:via-white/5 to-transparent" />
-        
-        <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <div className="mb-20">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-7xl font-bold font-heading mb-6 tracking-tighter"
-            >
-              What Clients <span className="text-accent italic font-light">Say</span>
-            </motion.h2>
-            <p className="text-light-text/60 text-lg">Feedback from international brands and startups.</p>
-            <div className="mt-8 flex justify-center">
-              <div className="w-12 h-1.5 bg-accent rounded-full" />
-            </div>
-          </div>
+      <section className="py-24 px-6 bg-black/5 dark:bg-white/2">
+        <div className="max-w-7xl mx-auto text-center">
+          <SectionHeading 
+            title="What Clients Say" 
+            subtitle="Feedback from brands I've worked with"
+          />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {testimonials.map((t, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {testimonials.map((t) => (
               <motion.div
                 key={t.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="relative p-10 rounded-[2.5rem] bg-black/2 dark:bg-white/2 border border-black/5 dark:border-white/5 text-left group hover:border-accent/30 transition-all duration-500"
+                className="p-8 rounded-3xl bg-white dark:bg-dark-card border border-black/5 dark:border-white/5 text-left"
               >
-                <div className="absolute top-8 right-10 text-accent/10 group-hover:text-accent/20 transition-colors">
-                  <Smile size={60} />
+                <div className="flex items-center gap-4 mb-6">
+                  <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full" />
+                  <div>
+                    <h4 className="font-bold">{t.name}</h4>
+                    <p className="text-xs text-light-text">{t.role} at {t.company}</p>
+                  </div>
                 </div>
-                <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-8">
-                    <img src={t.avatar} alt={t.name} className="w-16 h-16 rounded-2xl object-cover grayscale group-hover:grayscale-0 transition-all" />
-                    <div>
-                      <h4 className="font-bold text-xl">{t.name}</h4>
-                      <p className="text-xs text-accent font-bold uppercase tracking-widest">{t.role} at {t.company}</p>
-                    </div>
-                  </div>
-                  <p className="text-light-text text-lg italic leading-relaxed mb-8">"{t.content}"</p>
-                  <div className="flex gap-1 text-accent">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <span key={i} className="text-xl">★</span>
-                    ))}
-                  </div>
+                <p className="text-light-text italic leading-relaxed">"{t.content}"</p>
+                <div className="mt-6 flex text-accent">
+                  {[...Array(t.rating)].map((_, i) => (
+                    <span key={i}>★</span>
+                  ))}
                 </div>
               </motion.div>
             ))}
